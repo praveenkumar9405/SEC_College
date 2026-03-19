@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sudharsan Engineering College – Excellence Since 2000</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:#0a1628;--royal:#1a3a6b;--accent:#c8922a;--gold:#e8b84b;
+    --cream:#f9f5ee;--white:#ffffff;--text:#1c2b3a;--muted:#5a6a7a;
+    --border:#dde3ec;--section-bg:#f4f7fc;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,22,40,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,146,42,0.2);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-logo{display:flex;align-items:center;gap:12px;}
+  .nav-logo .emblem{width:38px;height:38px;background:linear-gradient(135deg,var(--accent),var(--gold));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:18px;color:var(--navy);}
+  .nav-logo span{color:var(--white);font-weight:600;font-size:.95rem;}
+  .nav-logo small{display:block;color:rgba(255,255,255,.4);font-size:.6rem;}
+  .nav-links{display:flex;align-items:center;gap:.1rem;list-style:none;}
+  .nav-links a{color:rgba(255,255,255,.72);text-decoration:none;font-size:.78rem;font-weight:500;padding:6px 11px;border-radius:6px;transition:all .2s;}
+  .nav-links a:hover{color:var(--gold);background:rgba(200,146,42,.1);}
+  .nav-cta{background:linear-gradient(135deg,var(--accent),var(--gold));color:var(--navy)!important;padding:8px 16px!important;border-radius:8px!important;font-weight:700!important;}
+
+  /* HERO */
+  #hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:64px;}
+  .hero-bg{position:absolute;inset:0;background-image:url('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/afa6830de31740928dc039f29476de7a.png');background-size:cover;background-position:center;filter:brightness(.2);}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,22,40,.93) 0%,rgba(26,58,107,.65) 60%,rgba(10,22,40,.88) 100%);}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,146,42,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(200,146,42,.05) 1px,transparent 1px);background-size:60px 60px;}
+  .hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,146,42,.15);border:1px solid rgba(200,146,42,.35);border-radius:100px;padding:6px 14px;font-size:.72rem;font-weight:600;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem;animation:fadeInUp .6s ease both;}
+  .hero-badge::before{content:'●';font-size:.5rem;}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:1.5rem;animation:fadeInUp .6s .1s ease both;}
+  .hero-title span{background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .hero-desc{color:rgba(255,255,255,.65);font-size:1rem;line-height:1.8;margin-bottom:2rem;animation:fadeInUp .6s .2s ease both;}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeInUp .6s .3s ease both;}
+  .btn-p{background:linear-gradient(135deg,var(--accent),var(--gold));color:var(--navy);padding:14px 28px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(200,146,42,.35);}
+  .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,146,42,.5);}
+  .btn-g{background:transparent;color:var(--white);padding:14px 28px;border-radius:10px;font-weight:600;font-size:.9rem;text-decoration:none;border:1px solid rgba(255,255,255,.25);transition:all .3s;}
+  .btn-g:hover{border-color:var(--gold);color:var(--gold);}
+  .hero-panel{background:rgba(10,22,40,.65);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:2.5rem;backdrop-filter:blur(16px);animation:fadeInRight .7s .3s ease both;}
+  .panel-header{color:rgba(255,255,255,.4);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:1rem;}
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .stat-val{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--white);line-height:1;}
+  .stat-val span{color:var(--gold);}
+  .stat-lbl{color:rgba(255,255,255,.5);font-size:.75rem;margin-top:4px;}
+  .badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);}
+  .bp{background:rgba(200,146,42,.12);border:1px solid rgba(200,146,42,.25);border-radius:100px;padding:5px 12px;font-size:.68rem;font-weight:600;color:var(--gold);}
+
+  /* PHOTO STRIP */
+  .photo-strip{background:var(--navy);display:flex;height:190px;overflow:hidden;}
+  .ps-item{flex:1;overflow:hidden;position:relative;cursor:pointer;}
+  .ps-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s,filter .3s;filter:brightness(.65);}
+  .ps-item:hover img{transform:scale(1.08);filter:brightness(1);}
+  .ps-lbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(10,22,40,.85));padding:20px 10px 8px;font-size:.65rem;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.08em;text-transform:uppercase;text-align:center;opacity:0;transition:opacity .3s;}
+  .ps-item:hover .ps-lbl{opacity:1;}
+
+  /* COMMONS */
+  section{padding:5rem 2rem;}
+  .container{max-width:1200px;margin:0 auto;}
+  .sec-lbl{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;}
+  .sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;color:var(--navy);line-height:1.2;margin-bottom:1rem;}
+  .sec-title span{color:var(--accent);}
+  .sec-desc{color:var(--muted);font-size:.95rem;line-height:1.8;max-width:560px;margin-bottom:2.5rem;}
+  .divider{width:56px;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:2px;margin:1rem 0 2rem;}
+
+  /* ABOUT */
+  #about{background:var(--cream);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+  .about-imgs{position:relative;}
+  .about-main{width:100%;height:320px;object-fit:cover;border-radius:18px;box-shadow:0 20px 60px rgba(10,22,40,.2);}
+  .about-accent{position:absolute;bottom:-24px;right:-24px;width:175px;height:135px;object-fit:cover;border-radius:14px;border:4px solid var(--cream);box-shadow:0 10px 30px rgba(10,22,40,.18);}
+  .about-text p{color:var(--muted);line-height:1.9;margin-bottom:1rem;font-size:.95rem;}
+  .acc-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.5rem;}
+  .acc-badge{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;color:var(--navy);box-shadow:0 2px 8px rgba(0,0,0,.05);}
+
+  /* PROGRAMS */
+  #programs{background:var(--white);}
+  .prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:2.5rem;}
+  .pg-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+  .prog-card{background:var(--section-bg);border-radius:14px;padding:1.5rem;border:1px solid var(--border);transition:all .25s;position:relative;overflow:hidden;}
+  .prog-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));transform:scaleX(0);transition:.25s;}
+  .prog-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1);}
+  .prog-card:hover::before{transform:scaleX(1);}
+  .prog-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--royal),var(--navy));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem;}
+  .prog-card h4{font-size:.92rem;font-weight:600;color:var(--navy);margin-bottom:.4rem;}
+  .prog-card span{font-size:.75rem;color:var(--muted);font-family:'DM Mono',monospace;}
+
+  /* DEPARTMENTS */
+  #departments{background:var(--section-bg);}
+  .dept-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-bottom:2rem;}
+  .dept-card{background:var(--white);border-radius:16px;padding:1.6rem;border:1px solid var(--border);text-align:center;transition:all .25s;cursor:pointer;}
+  .dept-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(10,22,40,.12);border-color:var(--accent);}
+  .di{font-size:2rem;margin-bottom:1rem;display:block;}
+  .dept-card h4{font-size:.86rem;font-weight:600;color:var(--navy);margin-bottom:.5rem;}
+  .dt{display:inline-block;background:rgba(200,146,42,.1);color:var(--accent);border-radius:6px;padding:3px 10px;font-size:.66rem;font-weight:600;}
+  .dept-feats{margin-top:.8rem;display:flex;flex-direction:column;gap:3px;}
+  .dept-feats span{font-size:.7rem;color:var(--muted);}
+  .dept-photos{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem;}
+  .dp-item{border-radius:14px;overflow:hidden;height:155px;cursor:pointer;position:relative;}
+  .dp-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .3s;filter:brightness(.72);}
+  .dp-item:hover img{transform:scale(1.07);filter:brightness(1);}
+  .dp-lbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(10,22,40,.85));padding:20px 10px 8px;font-size:.7rem;font-weight:600;color:var(--white);letter-spacing:.04em;}
+
+  /* FACILITIES */
+  #facilities{background:var(--white);}
+  .fac-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+  .fac-grp{margin-bottom:2rem;}
+  .fac-grp-title{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+  .fac-list{display:flex;flex-direction:column;gap:8px;}
+  .fac-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--section-bg);border-radius:10px;border:1px solid var(--border);font-size:.88rem;color:var(--text);font-weight:500;transition:all .2s;}
+  .fac-item:hover{border-color:var(--accent);background:rgba(200,146,42,.05);}
+  .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--gold));flex-shrink:0;}
+  .sona-card{background:linear-gradient(135deg,var(--navy),var(--royal));border-radius:20px;padding:2.5rem;color:var(--white);position:relative;overflow:hidden;margin-top:1.5rem;}
+  .sona-card h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1rem;color:var(--gold);}
+  .sys-tags{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;}
+  .sys-tag{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:6px 14px;font-size:.78rem;color:rgba(255,255,255,.85);}
+  .sona-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .sona-cols h5{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem;}
+  .sona-cols ul{list-style:none;}
+  .sona-cols ul li{font-size:.83rem;color:rgba(255,255,255,.75);padding:3px 0;}
+  .sona-cols ul li::before{content:'→ ';color:var(--gold);}
+  /* Campus gallery */
+  .cam-gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:200px 200px;gap:12px;margin-top:2.5rem;}
+  .gi{border-radius:14px;overflow:hidden;position:relative;cursor:pointer;}
+  .gi.wide{grid-column:span 2;}
+  .gi.tall{grid-row:span 2;}
+  .gi img{width:100%;height:100%;object-fit:cover;transition:transform .5s,filter .3s;filter:brightness(.82);}
+  .gi:hover img{transform:scale(1.06);filter:brightness(1);}
+  .gi-cap{position:absolute;inset:0;display:flex;align-items:flex-end;background:linear-gradient(transparent 50%,rgba(10,22,40,.75));padding:14px;opacity:0;transition:opacity .3s;}
+  .gi:hover .gi-cap{opacity:1;}
+  .gi-cap span{font-size:.76rem;font-weight:600;color:var(--white);}
+
+  /* HOSTEL */
+  #hostel{background:var(--navy);padding:5rem 2rem;}
+  #hostel .sec-title{color:var(--white);}
+  .hostel-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem;}
+  .hostel-card{border-radius:18px;overflow:hidden;position:relative;height:280px;}
+  .hostel-card img{width:100%;height:100%;object-fit:cover;filter:brightness(.65);transition:all .4s;}
+  .hostel-card:hover img{transform:scale(1.04);filter:brightness(.88);}
+  .hostel-ov{position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(10,22,40,.92));display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;}
+  .hostel-ov h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--white);margin-bottom:.5rem;}
+  .hostel-ov p{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.6;}
+  .hostel-feats{display:flex;gap:1rem;margin-top:2rem;}
+  .hf{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.2rem;text-align:center;}
+  .hf .hf-i{font-size:1.5rem;margin-bottom:.5rem;}
+  .hf p{font-size:.78rem;color:rgba(255,255,255,.7);font-weight:500;}
+
+  /* PLACEMENT */
+  #placement{background:var(--section-bg);}
+  .plc-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start;}
+  .act-list{display:flex;flex-direction:column;gap:10px;}
+  .act-item{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:var(--white);border-radius:12px;border:1px solid var(--border);}
+  .act-num{width:28px;height:28px;flex-shrink:0;background:linear-gradient(135deg,var(--accent),var(--gold));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--navy);font-family:'DM Mono',monospace;}
+  .act-item h5{font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:2px;}
+  .act-item p{font-size:.78rem;color:var(--muted);}
+  .mou-bann{background:linear-gradient(135deg,rgba(200,146,42,.1),rgba(232,184,75,.1));border:1px solid rgba(200,146,42,.25);border-radius:12px;padding:1.2rem 1.5rem;display:flex;align-items:center;gap:14px;margin-top:1.5rem;}
+  .mou-bann h5{font-size:.88rem;font-weight:600;color:var(--navy);}
+  .mou-bann p{font-size:.78rem;color:var(--muted);}
+  .rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem;}
+  .rec-pill{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;font-size:.8rem;font-weight:600;color:var(--navy);transition:all .2s;}
+  .rec-pill:hover{border-color:var(--accent);color:var(--accent);}
+  .plc-photo{border-radius:14px;overflow:hidden;height:175px;cursor:pointer;}
+  .plc-photo img{width:100%;height:100%;object-fit:cover;filter:brightness(.78);transition:transform .4s,filter .3s;}
+  .plc-photo:hover img{transform:scale(1.05);filter:brightness(1);}
+
+  /* TESTIMONIALS */
+  #testimonials{background:var(--white);}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .testi-card{background:var(--section-bg);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:all .25s;}
+  .testi-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(10,22,40,.1);border-color:var(--accent);}
+  .tq{color:var(--accent);font-size:2rem;line-height:1;margin-bottom:1rem;font-family:'Playfair Display',serif;}
+  .testi-card p{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:1.5rem;}
+  .ta{display:flex;align-items:center;gap:12px;}
+  .tav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--royal),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--white);font-size:.9rem;}
+  .ta h5{font-size:.85rem;color:var(--navy);font-weight:600;}
+  .ta span{font-size:.72rem;color:var(--accent);}
+
+  /* ADMISSIONS */
+  #admissions{background:var(--cream);}
+  .adm-layout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;}
+  .adm-card{background:var(--white);border-radius:16px;padding:2rem;border:1px solid var(--border);box-shadow:0 2px 16px rgba(0,0,0,.05);}
+  .adm-icon{font-size:1.8rem;margin-bottom:1rem;}
+  .adm-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:1rem;}
+  .adm-list{list-style:none;}
+  .adm-list li{font-size:.85rem;color:var(--muted);padding:5px 0;border-bottom:1px solid var(--border);}
+  .adm-list li:last-child{border-bottom:none;}
+  .adm-list li strong{color:var(--text);}
+  .sch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+  .sch-pill{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:14px 16px;font-size:.83rem;font-weight:600;color:var(--navy);}
+  .sch-pill span{display:block;font-size:.72rem;color:var(--muted);margin-top:3px;font-weight:400;}
+
+  /* TRANSPORT */
+  #transport{background:var(--section-bg);}
+  .tr-layout{display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:center;}
+  .tr-feats{display:flex;flex-direction:column;gap:12px;margin-top:1.5rem;}
+  .tr-item{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--white);border-radius:12px;border:1px solid var(--border);}
+  .tr-item p{font-size:.88rem;font-weight:500;color:var(--navy);}
+  .rts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .rt-card{background:var(--white);border-radius:12px;padding:1.2rem;border:1px solid var(--border);text-align:center;transition:all .2s;}
+  .rt-card:hover{border-color:var(--accent);}
+  .rt-card .ri{font-size:1.4rem;margin-bottom:6px;}
+  .rt-card p{font-size:.83rem;font-weight:600;color:var(--navy);}
+  .rt-card span{font-size:.7rem;color:var(--muted);}
+
+  /* EVENTS */
+  #events{background:var(--white);}
+  .ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .ev-card{background:var(--section-bg);border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:all .25s;}
+  .ev-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1);}
+  .ev-photo{height:175px;overflow:hidden;}
+  .ev-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s;filter:brightness(.82);}
+  .ev-card:hover .ev-photo img{transform:scale(1.06);}
+  .ev-body{padding:1.5rem;}
+  .ev-type{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;display:inline-block;}
+  .ev-card h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);margin-bottom:.7rem;}
+  .ev-card p{font-size:.82rem;color:var(--muted);line-height:1.7;}
+
+  /* BLOGS */
+  #blogs{background:var(--section-bg);}
+  .bl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .bl-card{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:all .25s;}
+  .bl-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1);}
+  .bl-thumb{height:155px;overflow:hidden;}
+  .bl-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;filter:brightness(.78);}
+  .bl-card:hover .bl-thumb img{transform:scale(1.06);filter:brightness(.95);}
+  .bl-body{padding:1.4rem;}
+  .bl-tag{display:inline-block;background:rgba(200,146,42,.1);color:var(--accent);border-radius:6px;padding:3px 10px;font-size:.66rem;font-weight:600;margin-bottom:.8rem;}
+  .bl-card h4{font-size:.93rem;font-weight:600;color:var(--navy);margin-bottom:.6rem;line-height:1.4;}
+  .bl-card p{font-size:.8rem;color:var(--muted);line-height:1.6;}
+
+  /* CONTACT */
+  #contact{background:var(--navy);}
+  #contact .sec-title{color:var(--white);}
+  .ct-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;}
+  .cg{margin-bottom:2rem;}
+  .cg h4{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.8rem;}
+  .ci{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+  .ci-ic{width:32px;height:32px;flex-shrink:0;background:rgba(200,146,42,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;}
+  .ci p{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.6;}
+  .ci strong{color:var(--white);font-size:.88rem;}
+  .hrs{background:rgba(200,146,42,.12);border:1px solid rgba(200,146,42,.25);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:10px;margin-top:1rem;}
+  .hrs p{font-size:.83rem;color:rgba(255,255,255,.8);}
+  .hrs strong{color:var(--gold);}
+  .ct-form{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2.5rem;}
+  .ct-form h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--white);margin-bottom:1.5rem;}
+  .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+  .fg{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;}
+  .fg label{font-size:.74rem;color:rgba(255,255,255,.5);font-weight:500;}
+  .fg input,.fg select,.fg textarea{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:12px 14px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;}
+  .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);}
+  .fg select option{background:var(--navy);}
+  .fg textarea{height:100px;resize:none;}
+  .f-submit{width:100%;background:linear-gradient(135deg,var(--accent),var(--gold));color:var(--navy);padding:14px;border:none;border-radius:10px;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .3s;}
+  .f-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,146,42,.4);}
+
+  /* FOOTER */
+  footer{background:#06101e;padding:3rem 2rem 2rem;border-top:1px solid rgba(200,146,42,.15);}
+  .ft-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;}
+  .ft-brand .fl{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--white);font-weight:900;}
+  .ft-brand .fl span{color:var(--gold);}
+  .ft-brand p{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.8;margin-top:.8rem;}
+  .ft-col h5{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1rem;}
+  .ft-col ul{list-style:none;}
+  .ft-col ul li{margin-bottom:8px;}
+  .ft-col ul li a{color:rgba(255,255,255,.55);text-decoration:none;font-size:.83rem;transition:color .2s;}
+  .ft-col ul li a:hover{color:var(--gold);}
+  .ft-btm{max-width:1200px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;}
+  .ft-btm p{font-size:.75rem;color:rgba(255,255,255,.3);}
+
+  /* LIGHTBOX */
+  .lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(5,10,20,.95);align-items:center;justify-content:center;}
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+  .lb-close{position:absolute;top:20px;right:24px;color:var(--white);font-size:2rem;cursor:pointer;opacity:.7;transition:opacity .2s;}
+  .lb-close:hover{opacity:1;}
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeInRight{from{opacity:0;transform:translateX(24px);}to{opacity:1;transform:translateX(0);}}
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero-content,.about-grid,.fac-layout,.plc-grid,.ct-layout{grid-template-columns:1fr;}
+    .hero-panel,.nav-links{display:none;}
+    .prog-grid,.dept-grid,.testi-grid,.adm-layout,.ft-grid{grid-template-columns:1fr 1fr;}
+    .dept-photos,.cam-gallery{grid-template-columns:1fr 1fr;}
+    .cam-gallery{grid-template-rows:auto;}
+    .gi.wide,.gi.tall{grid-column:auto;grid-row:auto;}
+  }
+  @media(max-width:580px){
+    .prog-grid,.dept-grid,.testi-grid,.adm-layout,.ft-grid,.ev-grid,.bl-grid,.sch-grid,.rts-grid,.hostel-grid,.dept-photos,.hostel-feats{grid-template-columns:1fr;}
+    section{padding:3rem 1.2rem;}
+    .photo-strip{height:120px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lb-close">✕</span>
+  <img id="lb-img" src="" alt="SEC Campus Photo"/>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="emblem">S</div>
+    <div><span>Sudharsan Engineering College</span><small>Est. 2000 · Pudukkottai, Tamil Nadu</small></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#departments">Departments</a></li>
+    <li><a href="#facilities">Facilities</a></li>
+    <li><a href="#hostel">Campus Life</a></li>
+    <li><a href="#placement">Placements</a></li>
+    <li><a href="#admissions">Admissions</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#admissions" class="nav-cta">Apply Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO — Real SEC campus photo as background -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">NAAC 'A' Grade · AICTE Approved · Anna University Affiliated</div>
+      <h1 class="hero-title">Engineering<br>Excellence<br><span>Since 2000</span></h1>
+      <p class="hero-desc">Sudharsan Engineering College — shaping engineers, innovators, and leaders in Pudukkottai, Tamil Nadu. On NH 210, Sathiyamangalam, 40 km from Trichy.</p>
+      <div class="hero-btns">
+        <a href="#admissions" class="btn-p">Apply for Admission</a>
+        <a href="#programs" class="btn-g">Explore Programs</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="panel-header">Institute at a Glance</div>
+      <div class="stats-grid">
+        <div><div class="stat-val">25<span>+</span></div><div class="stat-lbl">Years of Excellence</div></div>
+        <div><div class="stat-val">9<span>+</span></div><div class="stat-lbl">UG Programs</div></div>
+        <div><div class="stat-val">2</div><div class="stat-lbl">PG Programs</div></div>
+        <div><div class="stat-val"><span>"</span>A<span>"</span></div><div class="stat-lbl">NAAC Grade</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="bp">AICTE Approved</span>
+        <span class="bp">Anna University</span>
+        <span class="bp">NAAC 'A'</span>
+        <span class="bp">NH 210 · Pudukkottai</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL SEC PHOTO STRIP — 6 actual campus images -->
+<div class="photo-strip">
+  <div class="ps-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/db3936509ef9467fa1d15e82ee7b690d.png')">
+    <img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/db3936509ef9467fa1d15e82ee7b690d.png" alt="SEC Campus" loading="lazy"/>
+    <div class="ps-lbl">Campus</div>
+  </div>
+  <div class="ps-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/a802d7156bfa4e2ab7d77bf3f3acc3d2.png')">
+    <img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/a802d7156bfa4e2ab7d77bf3f3acc3d2.png" alt="SEC Facilities" loading="lazy"/>
+    <div class="ps-lbl">Facilities</div>
+  </div>
+  <div class="ps-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/9878598e9d2540fbb3e978c6d719190a.png')">
+    <img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/9878598e9d2540fbb3e978c6d719190a.png" alt="SEC Labs" loading="lazy"/>
+    <div class="ps-lbl">Labs</div>
+  </div>
+  <div class="ps-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/e517bb2c35d242d5826a24b7b743d5b9.png')">
+    <img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/e517bb2c35d242d5826a24b7b743d5b9.png" alt="SEC Infrastructure" loading="lazy"/>
+    <div class="ps-lbl">Infrastructure</div>
+  </div>
+  <div class="ps-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/de74ed9081874050af49635c395e6690.png')">
+    <img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/de74ed9081874050af49635c395e6690.png" alt="SEC Classrooms" loading="lazy"/>
+    <div class="ps-lbl">Classrooms</div>
+  </div>
+  <div class="ps-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/18e008cdb5a04259b807d0ba94e7ac47.png')">
+    <img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/18e008cdb5a04259b807d0ba94e7ac47.png" alt="SEC Library" loading="lazy"/>
+    <div class="ps-lbl">Library</div>
+  </div>
+</div>
+
+<!-- ABOUT — Real SEC photos -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid reveal">
+      <div class="about-imgs">
+        <img class="about-main" src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/3d2ffee943694bbeac7afdc4ccce8829.png" alt="Sudharsan Engineering College Main Campus" loading="lazy"/>
+        <img class="about-accent" src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/b3aae25ff4e24f1a969735dc509c3a7f.png" alt="SEC Students" loading="lazy"/>
+      </div>
+      <div class="about-text">
+        <span class="sec-lbl">Who We Are</span>
+        <h2 class="sec-title">Built on <span>Trust</span>,<br>Driven by Excellence</h2>
+        <div class="divider"></div>
+        <p>Sudharsan Engineering College was established in 2000 under the Sudharsan Educational Trust, located at Sathiyamangalam on NH 210 — about 12 km from Pudukkottai and 40 km from Trichy. Founded with a commitment to providing quality technical education in the rural district of Pudukkottai.</p>
+        <p>Affiliated to Anna University Chennai and approved by AICTE, the college holds a prestigious NAAC 'A' Grade accreditation — reflecting its commitment to academic standards, infrastructure, and student outcomes.</p>
+        <div class="acc-strip">
+          <div class="acc-badge">🏛 Anna University Affiliated</div>
+          <div class="acc-badge">✅ AICTE Approved</div>
+          <div class="acc-badge">🏅 NAAC 'A' Grade</div>
+          <div class="acc-badge">📅 Est. 2000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="container reveal">
+    <span class="sec-lbl">Academics</span>
+    <h2 class="sec-title">Academic <span>Programs</span></h2>
+    <div class="divider"></div>
+    <p class="sec-desc">11 programs spanning Undergraduate and Postgraduate levels, all affiliated to Anna University, Chennai.</p>
+    <p style="font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Undergraduate Programs — B.E / B.Tech (9 Programs)</p>
+    <div class="prog-grid">
+      <div class="prog-card"><div class="prog-icon">⚙️</div><h4>Civil Engineering</h4><span>B.E · 4 Years</span></div>
+      <div class="prog-card"><div class="prog-icon">🔧</div><h4>Mechanical Engineering</h4><span>B.E · 4 Years</span></div>
+      <div class="prog-card"><div class="prog-icon">⚡</div><h4>Electrical & Electronics Engineering</h4><span>B.E · 4 Years</span></div>
+      <div class="prog-card"><div class="prog-icon">📡</div><h4>Electronics & Communication Engineering</h4><span>B.E · 4 Years</span></div>
+      <div class="prog-card"><div class="prog-icon">💻</div><h4>Computer Science & Engineering</h4><span>B.E · 4 Years</span></div>
+      <div class="prog-card"><div class="prog-icon">🤖</div><h4>Artificial Intelligence & Data Science</h4><span>B.Tech · 4 Years</span></div>
+      <div class="prog-card"><div class="prog-icon">🧠</div><h4>Artificial Intelligence & Machine Learning</h4><span>B.Tech · 4 Years</span></div>
+      <div class="prog-card"><div class="prog-icon">🌐</div><h4>Information Technology</h4><span>B.Tech · 4 Years</span></div>
+      <div class="prog-card"><div class="prog-icon">🔒</div><h4>Cyber Security</h4><span>B.Tech · 4 Years</span></div>
+    </div>
+    <p style="font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Postgraduate Programs (2 Programs)</p>
+    <div class="pg-grid">
+      <div class="prog-card"><div class="prog-icon">🎓</div><h4>M.E Computer Science & Engineering</h4><span>Postgraduate · 2 Years</span></div>
+      <div class="prog-card"><div class="prog-icon">📊</div><h4>Master of Business Administration (MBA)</h4><span>Postgraduate · 2 Years</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPARTMENTS with real event photos -->
+<section id="departments">
+  <div class="container reveal">
+    <span class="sec-lbl">Departments</span>
+    <h2 class="sec-title">Our <span>Departments</span></h2>
+    <div class="divider"></div>
+    <p class="sec-desc">Each department has a dedicated technical association, conducts workshops, meetings, and events for holistic student development.</p>
+    <div class="dept-grid">
+      <div class="dept-card"><span class="di">⚙️</span><h4>Civil Engineering</h4><span class="dt">CE</span><div class="dept-feats"><span>✦ Technical Association</span><span>✦ Workshops & Events</span></div></div>
+      <div class="dept-card"><span class="di">🔧</span><h4>Mechanical Engineering</h4><span class="dt">ME</span><div class="dept-feats"><span>✦ Technical Association</span><span>✦ Workshops & Events</span></div></div>
+      <div class="dept-card"><span class="di">⚡</span><h4>Electrical & Electronics</h4><span class="dt">EEE</span><div class="dept-feats"><span>✦ Technical Association</span><span>✦ Workshops & Events</span></div></div>
+      <div class="dept-card"><span class="di">📡</span><h4>Electronics & Comm.</h4><span class="dt">ECE</span><div class="dept-feats"><span>✦ Technical Association</span><span>✦ Workshops & Events</span></div></div>
+      <div class="dept-card"><span class="di">💻</span><h4>Computer Science & Engg.</h4><span class="dt">CSE</span><div class="dept-feats"><span>✦ Technical Association</span><span>✦ Workshops & Events</span></div></div>
+      <div class="dept-card"><span class="di">🤖</span><h4>AI & Data Science</h4><span class="dt">AI&DS</span><div class="dept-feats"><span>✦ Technical Association</span><span>✦ Workshops & Events</span></div></div>
+      <div class="dept-card"><span class="di">🧠</span><h4>AI & Machine Learning</h4><span class="dt">AI&ML</span><div class="dept-feats"><span>✦ Technical Association</span><span>✦ Workshops & Events</span></div></div>
+      <div class="dept-card"><span class="di">🌐</span><h4>Information Technology</h4><span class="dt">IT</span><div class="dept-feats"><span>✦ Technical Association</span><span>✦ Workshops & Events</span></div></div>
+      <div class="dept-card"><span class="di">🔒</span><h4>Cyber Security</h4><span class="dt">CS</span><div class="dept-feats"><span>✦ Technical Association</span><span>✦ Workshops & Events</span></div></div>
+      <div class="dept-card"><span class="di">🔬</span><h4>Science & Humanities</h4><span class="dt">S&H</span><div class="dept-feats"><span>✦ Foundation Courses</span><span>✦ Value Education</span></div></div>
+    </div>
+    <!-- Real SEC department/event photos -->
+    <div class="dept-photos">
+      <div class="dp-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/c59fa4c31f8c4792a83b951f35bd8277.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/c59fa4c31f8c4792a83b951f35bd8277.png" alt="Department Events" loading="lazy"/><div class="dp-lbl">Department Events</div></div>
+      <div class="dp-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/5733cb64fb614d9abeac228927d4582a.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/5733cb64fb614d9abeac228927d4582a.png" alt="Technical Symposium" loading="lazy"/><div class="dp-lbl">Technical Symposium</div></div>
+      <div class="dp-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/9d9533372d164b03a026e738a0850b05.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/9d9533372d164b03a026e738a0850b05.png" alt="Student Activities" loading="lazy"/><div class="dp-lbl">Student Activities</div></div>
+      <div class="dp-item" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/c6a52c512b5a405b82515213ab0846a2.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/c6a52c512b5a405b82515213ab0846a2.png" alt="Workshops" loading="lazy"/><div class="dp-lbl">Workshops</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES + real campus gallery -->
+<section id="facilities">
+  <div class="container reveal">
+    <span class="sec-lbl">Infrastructure</span>
+    <h2 class="sec-title">World-Class <span>Facilities</span></h2>
+    <div class="divider"></div>
+    <div class="fac-layout">
+      <div>
+        <div class="fac-grp">
+          <div class="fac-grp-title">Academic Infrastructure</div>
+          <div class="fac-list">
+            <div class="fac-item"><span class="dot"></span>Laboratories</div>
+            <div class="fac-item"><span class="dot"></span>Workshops</div>
+            <div class="fac-item"><span class="dot"></span>Computer & IT Center</div>
+            <div class="fac-item"><span class="dot"></span>Central Library</div>
+            <div class="fac-item"><span class="dot"></span>Smart Classrooms</div>
+            <div class="fac-item"><span class="dot"></span>Video Lectures</div>
+          </div>
+        </div>
+        <div class="fac-grp">
+          <div class="fac-grp-title">Campus Infrastructure</div>
+          <div class="fac-list">
+            <div class="fac-item"><span class="dot"></span>Auditorium</div>
+            <div class="fac-item"><span class="dot"></span>Seminar Halls</div>
+            <div class="fac-item"><span class="dot"></span>Canteen</div>
+            <div class="fac-item"><span class="dot"></span>Hostel – Boys & Girls</div>
+            <div class="fac-item"><span class="dot"></span>Gymnasium</div>
+            <div class="fac-item"><span class="dot"></span>Medical Care</div>
+            <div class="fac-item"><span class="dot"></span>Sports Facilities</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sona-card">
+          <h3>🖥 Sona IT Center</h3>
+          <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin-bottom:1rem;">A dedicated high-performance IT training centre with the latest systems and industry programs.</p>
+          <div style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem;">High-Speed Systems Available</div>
+          <div class="sys-tags"><span class="sys-tag">Intel Core i3</span><span class="sys-tag">Intel Core i5</span><span class="sys-tag">Intel Core i7</span><span class="sys-tag">Desktops</span></div>
+          <div class="sona-cols">
+            <div><h5>Training Programs</h5><ul><li>Programming</li><li>Artificial Intelligence</li><li>Data Analytics</li><li>Cybersecurity</li></ul></div>
+            <div><h5>Activities Conducted</h5><ul><li>Workshops</li><li>Bootcamps</li><li>Certification Programs</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REAL SEC CAMPUS PHOTO GALLERY -->
+    <p style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3rem;margin-bottom:1rem;">Campus Photo Gallery — Click any photo to enlarge</p>
+    <div class="cam-gallery">
+      <div class="gi wide" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/afa6830de31740928dc039f29476de7a.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/afa6830de31740928dc039f29476de7a.png" alt="SEC Main Campus" loading="lazy"/><div class="gi-cap"><span>Main Campus</span></div></div>
+      <div class="gi tall" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/fcd0ddec450a4851a7d577e0991325e8.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/fcd0ddec450a4851a7d577e0991325e8.png" alt="SEC Building" loading="lazy"/><div class="gi-cap"><span>Campus Building</span></div></div>
+      <div class="gi" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/acec1edd2de8414dab693d51af23d8b5.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/acec1edd2de8414dab693d51af23d8b5.png" alt="SEC Infrastructure" loading="lazy"/><div class="gi-cap"><span>Infrastructure</span></div></div>
+      <div class="gi" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/db3936509ef9467fa1d15e82ee7b690d.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/db3936509ef9467fa1d15e82ee7b690d.png" alt="SEC Campus View" loading="lazy"/><div class="gi-cap"><span>Campus View</span></div></div>
+      <div class="gi" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/a802d7156bfa4e2ab7d77bf3f3acc3d2.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/a802d7156bfa4e2ab7d77bf3f3acc3d2.png" alt="SEC Facilities" loading="lazy"/><div class="gi-cap"><span>Facilities</span></div></div>
+      <div class="gi" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/9878598e9d2540fbb3e978c6d719190a.png')"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/9878598e9d2540fbb3e978c6d719190a.png" alt="SEC Labs" loading="lazy"/><div class="gi-cap"><span>Laboratories</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOSTEL & SPORTS — Real SEC photos -->
+<section id="hostel">
+  <div class="container reveal">
+    <span class="sec-lbl" style="color:var(--gold);">Campus Life</span>
+    <h2 class="sec-title">Hostel & <span style="color:var(--gold);">Sports</span></h2>
+    <div class="divider"></div>
+    <div class="hostel-grid">
+      <div class="hostel-card">
+        <img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/e517bb2c35d242d5826a24b7b743d5b9.png" alt="SEC Hostel" loading="lazy"/>
+        <div class="hostel-ov"><h3>Hostel Facilities</h3><p>Separate well-maintained hostels for boys and girls with 24/7 security and all essential amenities for comfortable student living.</p></div>
+      </div>
+      <div class="hostel-card">
+        <img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/5c13098845e44395ab0d6c883bb2e577.png" alt="SEC Sports" loading="lazy"/>
+        <div class="hostel-ov"><h3>Sports & Recreation</h3><p>Well-equipped sports facilities for both indoor and outdoor games, including a dedicated gymnasium for students and fitness enthusiasts.</p></div>
+      </div>
+    </div>
+    <div class="hostel-feats">
+      <div class="hf"><div class="hf-i">🏠</div><p>Boys Hostel</p></div>
+      <div class="hf"><div class="hf-i">🏠</div><p>Girls Hostel</p></div>
+      <div class="hf"><div class="hf-i">💪</div><p>Gymnasium</p></div>
+      <div class="hf"><div class="hf-i">⚽</div><p>Sports Ground</p></div>
+      <div class="hf"><div class="hf-i">🍽</div><p>Hygienic Canteen</p></div>
+      <div class="hf"><div class="hf-i">🏥</div><p>Medical Care</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLACEMENT -->
+<section id="placement">
+  <div class="container reveal">
+    <span class="sec-lbl">Career & Placement</span>
+    <h2 class="sec-title">Placement <span>Cell</span></h2>
+    <div class="divider"></div>
+    <div class="plc-grid">
+      <div>
+        <p style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Placement Activities</p>
+        <div class="act-list">
+          <div class="act-item"><div class="act-num">01</div><div><h5>Campus Recruitment Drives</h5><p>On-campus hiring by leading companies across engineering and management sectors.</p></div></div>
+          <div class="act-item"><div class="act-num">02</div><div><h5>Pre-Placement Training</h5><p>Structured training to prepare students for the recruitment process well in advance.</p></div></div>
+          <div class="act-item"><div class="act-num">03</div><div><h5>Resume Building</h5><p>Guided sessions to help students craft professional, industry-ready resumes.</p></div></div>
+          <div class="act-item"><div class="act-num">04</div><div><h5>Mock Interviews</h5><p>Simulated interview rounds to build confidence and communication skills.</p></div></div>
+          <div class="act-item"><div class="act-num">05</div><div><h5>Aptitude Training</h5><p>Quantitative, logical reasoning, and verbal aptitude sessions for competitive exams.</p></div></div>
+          <div class="act-item"><div class="act-num">06</div><div><h5>Industry Visits</h5><p>Exposure visits to industries providing real-world perspective to students.</p></div></div>
+        </div>
+        <div class="mou-bann"><span style="font-size:1.5rem;">🤝</span><div><h5>MoU with Apex Seekers</h5><p>Formal collaboration for professional training and career development programs.</p></div></div>
+      </div>
+      <div>
+        <p style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Alumni Placed At</p>
+        <div class="rec-grid">
+          <div class="rec-pill">Hyundai Motors</div><div class="rec-pill">Ola Electric</div><div class="rec-pill">Renault Nissan</div>
+          <div class="rec-pill">Capgemini</div><div class="rec-pill">Deloitte</div><div class="rec-pill">HCL</div>
+          <div class="rec-pill">Accenture</div><div class="rec-pill">Cognizant</div><div class="rec-pill">Virtusa</div>
+        </div>
+        <!-- Real SEC placement photo -->
+        <div class="plc-photo" onclick="openLB('https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/07e0681c13264c9fb9ce170169432e33.png')">
+          <img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/07e0681c13264c9fb9ce170169432e33.png" alt="SEC Placement Drive" loading="lazy"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container reveal">
+    <span class="sec-lbl">Alumni Speak</span>
+    <h2 class="sec-title">What Our <span>Alumni Say</span></h2>
+    <div class="divider"></div>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="tq">"</div><p>SEC gave me the technical foundation and confidence to crack my dream placement. The faculty guidance and placement training made all the difference in my career.</p><div class="ta"><div class="tav">A</div><div><h5>SEC Alumnus</h5><span>Placed at Hyundai Motors</span></div></div></div>
+      <div class="testi-card"><div class="tq">"</div><p>The campus life, the labs, and the support from the placement cell helped me secure a role at Capgemini. I'm grateful for the career-ready environment at SEC.</p><div class="ta"><div class="tav">S</div><div><h5>SEC Alumna</h5><span>Placed at Capgemini</span></div></div></div>
+      <div class="testi-card"><div class="tq">"</div><p>From aptitude training to mock interviews, SEC's placement cell is thorough. My experience at Deloitte today reflects the preparation I received here.</p><div class="ta"><div class="tav">R</div><div><h5>SEC Alumnus</h5><span>Placed at Deloitte</span></div></div></div>
+      <div class="testi-card"><div class="tq">"</div><p>Working at Ola Electric is a dream for any engineer. SEC's focus on emerging technologies like AI prepared me well for this role.</p><div class="ta"><div class="tav">M</div><div><h5>SEC Alumnus</h5><span>Placed at Ola Electric</span></div></div></div>
+      <div class="testi-card"><div class="tq">"</div><p>The department workshops and technical associations at SEC pushed me to grow beyond the syllabus. Renault Nissan values that holistic engineering mindset.</p><div class="ta"><div class="tav">P</div><div><h5>SEC Alumnus</h5><span>Placed at Renault Nissan</span></div></div></div>
+      <div class="testi-card"><div class="tq">"</div><p>SEC's vibrant campus and dedicated faculty shaped my overall personality. The industry visits and hands-on labs were invaluable for landing my IT role.</p><div class="ta"><div class="tav">K</div><div><h5>SEC Alumna</h5><span>IT Industry Professional</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section id="admissions">
+  <div class="container reveal">
+    <span class="sec-lbl">Join SEC</span>
+    <h2 class="sec-title">Admissions <span>2025–26</span></h2>
+    <div class="divider"></div>
+    <div class="adm-layout">
+      <div class="adm-card"><div class="adm-icon">📋</div><h3>Admission Process</h3><ul class="adm-list"><li><strong>Route 1:</strong> TNEA Counselling</li><li><strong>Route 2:</strong> Management Quota</li><li><strong>Mode:</strong> Online / Offline Application</li><li><strong>Lateral Entry:</strong> Available for Diploma holders</li></ul></div>
+      <div class="adm-card"><div class="adm-icon">📝</div><h3>Eligibility Criteria</h3><ul class="adm-list"><li><strong>Qualification:</strong> 10 + 2 (Higher Secondary)</li><li><strong>Subjects:</strong> Physics, Chemistry & Mathematics</li><li><strong>MBA:</strong> Any degree graduate</li><li><strong>PG:</strong> Relevant B.E / B.Tech degree</li></ul></div>
+      <div class="adm-card"><div class="adm-icon">📞</div><h3>Admission Contact</h3><ul class="adm-list"><li><strong>Email:</strong> admission@sec.ac.in</li><li><strong>Email:</strong> principal@sec.ac.in</li><li><strong>Hours:</strong> 9:30 AM – 5:00 PM</li><li><strong>Days:</strong> Monday – Saturday</li></ul></div>
+    </div>
+    <p style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3rem;margin-bottom:1rem;">Scholarships Available</p>
+    <div class="sch-grid">
+      <div class="sch-pill">SC / ST Scholarship<span>Government of Tamil Nadu</span></div>
+      <div class="sch-pill">BC / MBC Scholarship<span>Government of Tamil Nadu</span></div>
+      <div class="sch-pill">Minority Scholarship<span>For eligible minority students</span></div>
+      <div class="sch-pill">Farmer's Scholarship<span>For children of farmers</span></div>
+      <div class="sch-pill">First Graduate Scholarship<span>First graduate in family</span></div>
+      <div class="sch-pill">AICTE Fee Waiver<span>TFWS Scheme</span></div>
+      <div class="sch-pill">Merit-Based Scholarship<span>Academic excellence</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSPORT -->
+<section id="transport">
+  <div class="container reveal">
+    <div class="tr-layout">
+      <div>
+        <span class="sec-lbl">Getting Here</span>
+        <h2 class="sec-title">Transport <span>Facility</span></h2>
+        <div class="divider"></div>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.8;margin-bottom:1.5rem;">SEC operates a dedicated bus service covering Pudukkottai, Trichy, and surrounding areas — ensuring students commute safely and punctually every day.</p>
+        <div class="tr-feats">
+          <div class="tr-item"><span style="font-size:1.2rem;">🕐</span><p>Timely pickup and drop service</p></div>
+          <div class="tr-item"><span style="font-size:1.2rem;">💰</span><p>Affordable fare for all students</p></div>
+          <div class="tr-item"><span style="font-size:1.2rem;">🔧</span><p>Well-maintained bus fleet</p></div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Service Routes Cover</p>
+        <div class="rts-grid">
+          <div class="rt-card"><div class="ri">🏙</div><p>Pudukkottai</p><span>Main city routes</span></div>
+          <div class="rt-card"><div class="ri">🏙</div><p>Trichy</p><span>Tiruchirappalli routes</span></div>
+          <div class="rt-card"><div class="ri">📍</div><p>Sathiyamangalam</p><span>Local area routes</span></div>
+          <div class="rt-card"><div class="ri">🗺</div><p>Nearby Areas</p><span>Extended coverage</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS with real photos -->
+<section id="events">
+  <div class="container reveal">
+    <span class="sec-lbl">Campus Life</span>
+    <h2 class="sec-title">Events & <span>News</span></h2>
+    <div class="divider"></div>
+    <div class="ev-grid">
+      <div class="ev-card">
+        <div class="ev-photo"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/c59fa4c31f8c4792a83b951f35bd8277.png" alt="Student Awareness Program" loading="lazy"/></div>
+        <div class="ev-body"><span class="ev-type">Student Program</span><h4>Student Awareness & Skill Discovery Program</h4><p>Helping students discover strengths, explore career paths, and build industry awareness from day one of college life.</p></div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-photo"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/07e0681c13264c9fb9ce170169432e33.png" alt="Campus Recruitment Drive" loading="lazy"/></div>
+        <div class="ev-body"><span class="ev-type">Placement Drive</span><h4>Campus Recruitment Drive</h4><p>On-campus recruitment drives connecting final-year students directly with leading companies for engineering and management roles.</p></div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-photo"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/5c13098845e44395ab0d6c883bb2e577.png" alt="Deekshi Techfest" loading="lazy"/></div>
+        <div class="ev-body"><span class="ev-type">Technical Fest</span><h4>Deekshi Techfest</h4><p>SEC's flagship annual technical festival featuring competitions, project exhibitions, workshops, and guest lectures from industry professionals.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOGS with real photos -->
+<section id="blogs">
+  <div class="container reveal">
+    <span class="sec-lbl">Insights & Guidance</span>
+    <h2 class="sec-title">From the <span>Blog</span></h2>
+    <div class="divider"></div>
+    <div class="bl-grid">
+      <div class="bl-card"><div class="bl-thumb"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/3d2ffee943694bbeac7afdc4ccce8829.png" alt="Campus Life" loading="lazy"/></div><div class="bl-body"><span class="bl-tag">Campus Life</span><h4>Life at SEC – A Campus Experience</h4><p>Explore what a day in the life of an SEC student looks like, from labs and lectures to clubs and cultural events.</p></div></div>
+      <div class="bl-card"><div class="bl-thumb"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/9d9533372d164b03a026e738a0850b05.png" alt="Career Readiness" loading="lazy"/></div><div class="bl-body"><span class="bl-tag">Career</span><h4>Career Readiness – How SEC Prepares You</h4><p>From aptitude training to mock interviews, discover how the placement cell shapes students into industry-ready professionals.</p></div></div>
+      <div class="bl-card"><div class="bl-thumb"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/c6a52c512b5a405b82515213ab0846a2.png" alt="AI Data Science" loading="lazy"/></div><div class="bl-body"><span class="bl-tag">Technology</span><h4>AI & Data Science – Why It's the Future</h4><p>A guide to understanding the AI and Data Science programs at SEC and the careers they unlock in today's world.</p></div></div>
+      <div class="bl-card"><div class="bl-thumb"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/acec1edd2de8414dab693d51af23d8b5.png" alt="Choosing College" loading="lazy"/></div><div class="bl-body"><span class="bl-tag">Admissions</span><h4>Choosing the Right Engineering College</h4><p>Key factors every student should evaluate — accreditation, placements, faculty, and campus life.</p></div></div>
+      <div class="bl-card"><div class="bl-thumb"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/5733cb64fb614d9abeac228927d4582a.png" alt="TNEA Admission" loading="lazy"/></div><div class="bl-body"><span class="bl-tag">Admissions</span><h4>TNEA Admission Guide 2025</h4><p>Step-by-step walkthrough of the TNEA counselling process, eligibility, and what to expect at SEC.</p></div></div>
+      <div class="bl-card"><div class="bl-thumb"><img src="https://media.getmyuni.com/azure/college-images-test/sudharsan-engineering-college-sec-pudukkottai/de74ed9081874050af49635c395e6690.png" alt="Techfest" loading="lazy"/></div><div class="bl-body"><span class="bl-tag">Events</span><h4>Deekshi Techfest – Highlights & Memories</h4><p>A recap of SEC's annual technical fest featuring student projects, competitions, and inspiring campus moments.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container reveal">
+    <span class="sec-lbl" style="color:var(--gold);">Reach Us</span>
+    <h2 class="sec-title">Get In <span style="color:var(--gold);">Touch</span></h2>
+    <div class="divider"></div>
+    <div class="ct-layout">
+      <div>
+        <div class="cg"><h4>Address</h4><div class="ci"><div class="ci-ic">📍</div><p>Sudharsan Engineering College<br>Sathiyamangalam, Pudukkottai – 622501<br>Tamil Nadu, India<br><span style="color:rgba(255,255,255,.4);font-size:.78rem;">NH 210 · 12 km from Pudukkottai · 40 km from Trichy</span></p></div></div>
+        <div class="cg"><h4>Email</h4><div class="ci"><div class="ci-ic">✉️</div><div><p><strong>principal@sec.ac.in</strong></p><p style="margin-top:4px;"><strong>admission@sec.ac.in</strong></p></div></div></div>
+        <div class="cg"><h4>Departments</h4><div class="ci"><div class="ci-ic">📞</div><div><p><strong>Principal's Office</strong></p><p><strong>Admission Cell</strong></p><p><strong>Placement Cell</strong></p><p><strong>Administrative Office</strong></p></div></div></div>
+        <div class="hrs"><span>🕐</span><p>Office Hours: <strong>9:30 AM – 5:00 PM</strong> · Monday to Saturday</p></div>
+      </div>
+      <div class="ct-form">
+        <h3>Send an Enquiry</h3>
+        <div class="f-row">
+          <div class="fg"><label>Full Name</label><input type="text" placeholder="Your full name"/></div>
+          <div class="fg"><label>Mobile Number</label><input type="tel" placeholder="+91 XXXXX XXXXX"/></div>
+        </div>
+        <div class="fg"><label>Email Address</label><input type="email" placeholder="your@email.com"/></div>
+        <div class="fg"><label>Enquiry About</label><select><option>Admissions 2025–26</option><option>Programs & Departments</option><option>Scholarships</option><option>Placement</option><option>Hostel & Facilities</option><option>Transport</option><option>Other</option></select></div>
+        <div class="fg"><label>Message</label><textarea placeholder="Write your message here…"></textarea></div>
+        <button class="f-submit" id="fBtn">Send Enquiry →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand"><div class="fl">Sudharsan <span>Engineering</span> College</div><p>Established in 2000 under Sudharsan Educational Trust. NAAC 'A' Grade · AICTE Approved · Anna University Affiliated. NH 210, Sathiyamangalam, Pudukkottai – 622501, Tamil Nadu.</p></div>
+    <div class="ft-col"><h5>Academics</h5><ul><li><a href="#programs">UG Programs</a></li><li><a href="#programs">PG Programs</a></li><li><a href="#departments">Departments</a></li><li><a href="#admissions">Academic Calendar</a></li><li><a href="#facilities">Library</a></li></ul></div>
+    <div class="ft-col"><h5>Campus</h5><ul><li><a href="#facilities">Facilities</a></li><li><a href="#facilities">Sona IT Center</a></li><li><a href="#hostel">Hostel & Sports</a></li><li><a href="#transport">Transport</a></li><li><a href="#events">Events</a></li></ul></div>
+    <div class="ft-col"><h5>Admissions</h5><ul><li><a href="#admissions">Apply Now</a></li><li><a href="#admissions">Eligibility</a></li><li><a href="#admissions">Scholarships</a></li><li><a href="#placement">Placements</a></li><li><a href="#contact">Contact Us</a></li></ul></div>
+  </div>
+  <div class="ft-btm">
+    <p>© 2025 Sudharsan Engineering College, Pudukkottai. All rights reserved.</p>
+    <p style="color:rgba(255,255,255,.2);">principal@sec.ac.in · admission@sec.ac.in</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:.08});
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+  // Lightbox
+  function openLB(src){ document.getElementById('lb-img').src=src; document.getElementById('lightbox').classList.add('open'); }
+  function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+  // Form
+  document.getElementById('fBtn').addEventListener('click', function(){
+    this.textContent='✓ Enquiry Sent!';
+    this.style.background='linear-gradient(135deg,#2ecc71,#27ae60)';
+    setTimeout(()=>{ this.textContent='Send Enquiry →'; this.style.background=''; },3000);
+  });
+
+  // Nav scroll highlight
+  const secs = document.querySelectorAll('section[id]');
+  const nls = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur='';
+    secs.forEach(s=>{ if(window.scrollY>=s.offsetTop-80) cur=s.getAttribute('id'); });
+    nls.forEach(a=>{ a.style.color=''; if(a.getAttribute('href')==='#'+cur) a.style.color='#e8b84b'; });
+  });
+</script>
+</body>
+</html>
